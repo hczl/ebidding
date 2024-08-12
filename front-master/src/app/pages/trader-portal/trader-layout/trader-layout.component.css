@@ -1,0 +1,133 @@
+.content {
+  height: calc(100vh - 64px);
+  border-radius: 10px;
+  padding: 16px;
+  overflow-y: scroll;
+}
+mat-sidenav-container {
+  height: calc(100vh - 65px);
+}
+.menu-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flext-start;
+  /* 这将使文本在按钮中居中 */
+  font-size: 1rem;
+  transition: background-color 0.3s, color 0.3s;
+  /* 添加颜色过渡动画 */
+  padding: 30px 0;
+  /* 在按钮的顶部和底部添加10px的padding */
+}
+.menu-button mat-icon {
+  margin-right: 8px;
+  transition: color 0.3s;
+  /* 为图标添加颜色过渡动画 */
+}
+.button-text {
+  margin-left: 16px;
+}
+/* 当按钮处于正常状态时的样式 */
+.menu-button,
+.menu-button mat-icon,
+.menu-button span {
+  color: inherit;
+}
+.avatar {
+  margin-top: 16px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+.name {
+  margin-top: 8px;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 40px;
+  text-align: center;
+}
+.designation {
+  margin-top: 2px;
+  font-size: 0.7rem;
+  color: lightgrey;
+}
+mat-divider {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+/* 定义滚动条的轨道（背景） */
+.content::-webkit-scrollbar {
+  width: 8px;
+  background-color: #F5F5F5;
+}
+/* 定义滚动条的滑块 */
+.content::-webkit-scrollbar-thumb {
+  background-color: #809c55;
+  border-radius: 10px;
+}
+/* 定义滚动条的轨道（背景）上的阴影或边界 */
+.content::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+.mat-drawer-container {
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
+  display: block;
+  overflow: hidden;
+  background-color: #ecedea;
+}
+.mat-toolbar {
+  background: #2b473e;
+  color: white;
+}
+.mat-sidenav {
+  height: 100vh;
+  width: 200px;
+  border-right: none;
+  background: #acafa9;
+  color: white;
+  padding: 10px;
+  box-sizing: border-box;
+  text-align: center;
+  position: relative;
+}
+/* 当按钮的路由被激活时，改变它和它内部的元素的颜色 */
+.menu-button-trader.active,
+.menu-button-trader.active mat-icon,
+.menu-button-trader.active span {
+  background-color: #2b473e !important;
+  /* 使用你想要的背景颜色 */
+  color: white !important;
+}
+/* 当鼠标悬停在按钮上时，改变背景颜色 */
+.menu-button:hover {
+  background-color: #ecedea !important;
+}
+.LogoutButton {
+  margin-left: auto;
+}
+.changenav {
+  margin-top: 300px;
+}
+.mat-drawer {
+  position: fixed;
+}
+.mat-drawer .changelock {
+  margin-top: 200px;
+  position: absolute;
+  left: 30px;
+  bottom: 30px;
+}
+.LogoutButton {
+  position: absolute;
+  bottom: 90px;
+  left: 30px;
+}
+.mat-toolbar-row,
+.mat-toolbar-single-row {
+  flex-direction: row-reverse;
+}

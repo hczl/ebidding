@@ -1,0 +1,55 @@
+<div class="mainbox">
+  <div class="topline fn-clear">
+    <img class="logo fl" src="../../../assets/images/logo.jpg" alt="">
+    <div class="topnav">
+      <button mat-button [matMenuTriggerFor]="menu">Home</button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>About Us</button>
+        <button mat-menu-item>Link Us</button>
+      </mat-menu>
+      <button mat-button [matMenuTriggerFor]="menu2">Activity</button>
+      <mat-menu #menu2="matMenu">
+        <button mat-menu-item>Activity</button>
+      </mat-menu>
+      <button mat-button [matMenuTriggerFor]="menu3">News</button>
+      <mat-menu #menu3="matMenu">
+        <button mat-menu-item>company</button>
+      </mat-menu>
+    </div>
+  </div>
+  <div class="topbar">
+    <img src="./../../../assets/images/bj.png" alt="">
+  </div>
+  <div class="form">
+    <h1>Enjoy bidding!</h1>
+    <form nz-form [formGroup]="loginForm" (ngSubmit)="submitLogin()">
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your name!">
+          <nz-input-group>
+            <input type="text" nz-input formControlName="username"
+              placeholder="Name" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your password!">
+          <nz-input-group>
+            <input type="password" nz-input formControlName="password"
+              placeholder="Password" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <!-- <a href="#" class="forgot">Forgot Password?</a> -->
+      <button nz-button nzType="primary"
+        class="button-block button login-button" [disabled]="!loginForm.valid">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span> Log In </button>
+    </form>
+  </div>
+</div>
+<footer>
+  <img src="./../../../assets/images/logo.jpg" alt=""> Deposit products and
+  services are offered by Citibank, N.A., Member FDIC
+</footer>

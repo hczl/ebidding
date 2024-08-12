@@ -1,0 +1,86 @@
+<!-- <div nz-row>
+    <div nz-col nzSpan="8" nzOffset="8">
+        <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+            <input type="text" nz-input placeholder="input" />
+        </nz-input-group>
+        <ng-template #suffixIconButton>
+            <button nz-button nzType="primary" nzSearch><span nz-icon nzType="search"></span></button>
+        </ng-template>
+    </div>
+</div> -->
+
+<div>
+    <nz-table #basicTable [nzData]="listOfBonds">
+        <thead>
+            <tr>
+                <!-- <th>bond_id</th> -->
+                <th>Cusip</th>
+                <th>Issuer</th>
+                <th>Rating</th>
+                <th>Coupon</th>
+                <th>Maturity Date</th>
+                <!-- <th>transaction_counts</th> -->
+                <th>Create BWIC</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of basicTable.data ; let i = index">
+                <!-- <td>{{ data.bond_id }}</td> -->
+                <td>{{ data.cusip }}</td>
+                <td>{{ data.issuer }}</td>
+                <td>{{ data.rating }}</td>
+                <td>{{ data.coupon }}</td>
+                <td>{{ data.maturityDate }}</td>
+                <!-- <td>{{ data.transaction_counts }}</td> -->
+                <!-- <td>
+                    <a>Action 一 {{ data.name }}</a>
+                    <nz-divider nzType="vertical"></nz-divider>
+                    <a>Delete</a>
+                </td> -->
+                <td><button nz-button nzType="primary" (click)="open(data)">Create</button></td>
+            </tr>
+        </tbody>
+    </nz-table>
+</div>
+<nz-drawer [nzBodyStyle]="{ overflow: 'auto' }" [nzMaskClosable]="false" [nzWidth]="720" [nzVisible]="visible"
+    nzTitle="Create" (nzOnClose)="close()">
+    <form nz-form *nzDrawerContent [formGroup]="bwicForm" (ngSubmit)="CreateBWIC()">
+        <div nz-col nzSpan="12" class="form-item">
+            <nz-form-item>
+                <nz-form-label class="form-label">StartPrice</nz-form-label>
+                <nz-form-control>
+                    <input nz-input placeholder="please enter StartPrice" formControlName="startPrice"
+                        style="width: 400px;" />
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div nz-col nzSpan="12" class="form-item">
+            <nz-form-item>
+                <nz-form-label class="form-label">Size</nz-form-label>
+                <nz-form-control>
+                    <input nz-input placeholder="please enter Size" formControlName="size" style="width: 400px;" />
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div nz-col nzSpan="12" class="form-item">
+            <nz-form-item>
+                <nz-form-label class="form-label">StartTime</nz-form-label>
+                <nz-form-control>
+                    <nz-date-picker formControlName="StartTime" style="width: 400px;"></nz-date-picker>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div nz-col nzSpan="12" class="form-item">
+            <nz-form-item>
+                <nz-form-label class="form-label">DueTime</nz-form-label>
+                <nz-form-control>
+                    <nz-date-picker formControlName="DueTime" style="width: 400px;"></nz-date-picker>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div class="button-container">
+            <button nz-button nzType="primary" type="submit">Submit</button>
+            <button nz-button nzType="default" type="button" (click)="close()">Close</button>
+        </div>
+    </form>
+</nz-drawer>

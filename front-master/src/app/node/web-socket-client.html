@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Message Board</title>
+  <style>
+    #messages {
+      height: 400px;
+      border: 1px solid black;
+      margin-bottom: 10px;
+      padding: 10px;
+      overflow-y: scroll;
+    }
+  </style>
+</head>
+<body>
+  <div id="messages"></div>
+  <form id="message-form">
+    <textarea id="message-input" rows="4" cols="50"></textarea>
+    <br/>
+    <input type="submit" value="Send">
+  </form>
+
+  <script>
+    // 创建WebSocket连接
+var socket = new WebSocket('ws://8.137.20.207:30001');
+
+// 获取DOM元素
+var messagesDiv = document.getElementById('messages');
+var messageForm = document.getElementById('message-form');
+var messageInput = document.getElementById('message-input');
+
+// 当WebSocket连接打开时，发送一条初始化消息
+socket.onopen = function(event) {
+  socket.send('Hello, server!');
+};
+
+// 收到服务器消息时在留言板上显示
+socket.onmessage = function(event) {
+  var messagePara = document.createElement('p');
+  messagePara.textContent = event.data;
+  messagesDiv.appendChild(messagePara);
+  // 滚动到底部
+  messagesDiv.scrollTop = messagesDiv.scrollHeight;
+};
+
+// 当提交表单时，发送一条消息到服务器并清空输入框
+messageForm.addEventListener('submit', function(event) {
+  event.preventDefault();
+  socket.send(messageInput.value);
+  messageInput.value = '';
+});
+
+
+
+  </script>
+</body>
+</html>

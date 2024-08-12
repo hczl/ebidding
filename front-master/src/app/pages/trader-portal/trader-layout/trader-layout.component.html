@@ -1,0 +1,48 @@
+<mat-toolbar class="mat-elevation-z8"
+  [ngClass]="{'mat-toolbar-trader':role ==='trader', 'mat-toolbar-client':role ==='client'}">
+  <button mat-icon-button *ngIf="sidenavMode === 'over'"
+    (click)="sidenav.toggle()">
+    <mat-icon *ngIf="!sidenav.opened && sidenavMode === 'over'"> menu
+    </mat-icon>
+    <mat-icon *ngIf="sidenav.opened && sidenavMode === 'over'"> close
+    </mat-icon>
+  </button> TRADER DASHBOARD <button mat-raised-button class="LogoutButton"
+    (click)="logout()">Logout</button>
+</mat-toolbar>
+<mat-sidenav-container>
+  <!-- <img class="avatar mat-elevation-z8" [src]="avatar" /> opened-->
+  <mat-sidenav #sidenav="matSidenav" [mode]="sidenavMode"
+    class="mat-elevation-z8"
+    [ngClass]="{'mat-sidenav-trader':role ==='trader','mat-sidenav-client':role ==='client'}">
+    <img class="avatar mat-elevation-z8"
+      src="./../../../../assets/images/logo.png" />
+    <h2 class="name"> username: {{username}}</h2>
+    <!-- <p class="designation">Software Engineer</p> -->
+    <mat-divider></mat-divider>
+    <ng-container *ngFor="let item of menus">
+      <button mat-button class="menu-button"
+        [ngClass]="{'menu-button-trader':role ==='trader','menu-button-client':role ==='client'}"
+        [routerLink]="item.path" routerLinkActive="active">
+        <span class="button-text">{{item.desc}}</span>
+      </button>
+      <mat-divider></mat-divider>
+    </ng-container>
+    <button mat-raised-button class="LogoutButton"
+      (click)="logout()">Logout</button>
+    <!-- <button mat-button class="menu-button" routerLink="/help">
+      <mat-icon>help</mat-icon>
+      <span>Help</span>
+    </button> -->
+    <mat-slide-toggle [(ngModel)]="isChecked"
+      (change)="toggleSidenavMode($event)"
+      class="changelock">Lock</mat-slide-toggle>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="content mat-elevation-z8">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+<mat-drawer-container class="mat-drawer-container"
+  [ngClass]="{'mat-drawer-container-trader':role ==='trader', 'mat-drawer-container-client':role ==='client'}">
+</mat-drawer-container>

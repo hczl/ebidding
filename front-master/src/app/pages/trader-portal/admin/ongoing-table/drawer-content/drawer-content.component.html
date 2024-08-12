@@ -1,0 +1,27 @@
+<!-- drawer-content.component.html -->
+
+<div class="container" nz-drawer-content>
+
+  <nz-table #filterTable [nzData]="data" nzTableLayout="fixed">
+    <thead>
+      <tr>
+        <th
+          *ngFor="let column of listOfColumns"
+          [nzSortFn]="column.sortFn"
+        >
+          {{ column.name }}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of filterTable.data">
+        <td>{{ data.ranking }}</td>
+        <td>{{ data.price }}</td>
+        <td>{{ data.accountId }}</td>
+        <td>{{ data.accountName }}</td>
+        <td>{{ data.time }}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+
+</div>

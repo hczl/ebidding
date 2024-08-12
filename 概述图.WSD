@@ -1,0 +1,79 @@
+@startuml
+package "Entities" {
+    class User {
+        +Integer id
+        +String username
+        +String password
+    }
+
+    class BWIC {
+        +Integer id
+        +String cusip
+        +Integer size
+        +Double startingPrice
+        +Date dueDate
+    }
+
+    class Bid {
+        +Integer id
+        +String clientId
+        +String bwicId
+        +Double price
+        +Double size
+        +String transactionId
+        +Long rank
+        +DateTime effectiveTime
+        +Long version
+        +Boolean active
+    }
+
+    class Recommendation {
+        +Integer id
+        +Integer bwicId
+        +String recommendationText
+    }
+
+    ' Relationships between entities
+    User --> "1..*" BWIC : view
+    BWIC --> "1..*" Bid
+    Bid --> User : submit
+    Recommendation --> BWIC
+    Recommendation --> "0..*" Bid
+}
+
+package "Services" {
+    interface UserService {
+        + login(username: String, password: String): User
+        + viewTraderBWICs(userId: Integer): List<BWIC>
+        + viewCustomerActiveBWICs(customerId: Integer): List<BWIC>
+    }
+
+    interface BWICService {
+        + createBWIC(bwic: BWIC): BWIC
+        + viewBWIC(bwicId: Integer): BWIC
+        + listBWICs(): List<BWIC>
+    }
+
+    interface BidService {
+        + Bid createBid(CreateBidRequest createBidRequest, String clientId)
+        + void deleteBid(String bidId, String clientId)
+    }
+
+    interface RecommendationService {
+        + generateRecommendations(): List<Recommendation>
+    }
+
+    ' Relationships between services
+    UserService --> BWICService : viewBWICs
+    BidService --> BWICService : manageBids
+    RecommendationService --> BWICService : getBWICs
+    RecommendationService --> BidService : getBids
+}
+
+' Relationships between entities and services
+UserService --> User
+UserService --> BWIC : viewTraderBWICs, viewCustomerActiveBWICs
+BWICService --> BWIC
+BidService --> Bid
+RecommendationService --> Recommendation
+RecommendationService --> BWIC : generateRecomme

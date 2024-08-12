@@ -1,0 +1,56 @@
+<mat-tab-group>
+  <mat-tab label="Chat with GPT"> <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-subtitle>Chat with GPT</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content class="content-border">
+        <p>{{ gptResponse }}</p>
+      </mat-card-content>
+      <mat-card-footer>
+        <mat-form-field appearance="outline"
+          class="example-full-width chat-form">
+          <mat-label>Trader Chat</mat-label>
+          <input matInput #message maxlength="256"
+            placeholder="I need help with..."
+            (keydown.enter)="sendMessage(message.value); $event.preventDefault()">
+          <!-- preventDefault() prevents form from being submitted twice -->
+          <mat-icon matSuffix [fontIcon]="submitIconType"
+            (click)="sendMessage(message.value)" [ngClass]="{'active': hover}"
+            (mouseover)="hover = true" (mouseout)="hover = false"></mat-icon>
+          <mat-hint align="start"><strong>Feel free to ask!</strong> </mat-hint>
+          <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+        </mat-form-field>
+        <mat-progress-bar [mode]="progressBarMode"></mat-progress-bar>
+      </mat-card-footer>
+    </mat-card> </mat-tab>
+  <mat-tab label="Table"> <nz-tabset [(nzSelectedIndex)]="selectedIndex"
+      (nzSelectedIndexChange)="tabChange($event)">
+      <nz-tab [nzTitle]="titleTemplate1">
+        <ng-template #titleTemplate1>
+          <span nz-icon [nzType]="tabs[0].iconType" nzTheme='twotone'
+            [nzSpin]="tabs[0].iconSpin" [nzTwotoneColor]="tabs[0].color"
+            style="margin: 0 0 0 0;"></span>
+          {{ tabs[0].name }}
+        </ng-template>
+        <app-ongoing-table [data]="ongoingData"></app-ongoing-table>
+      </nz-tab>
+      <nz-tab [nzTitle]="titleTemplate2">
+        <ng-template #titleTemplate2>
+          <span nz-icon [nzType]="tabs[1].iconType" nzTheme='twotone'
+            [nzSpin]="tabs[1].iconSpin" [nzTwotoneColor]="tabs[1].color"
+            style="margin: 0 0 0 0;"></span>
+          {{ tabs[1].name }}
+        </ng-template>
+        <app-upcoming-table [data]="upcomingData"></app-upcoming-table>
+      </nz-tab>
+      <nz-tab [nzTitle]="titleTemplate3">
+        <ng-template #titleTemplate3>
+          <span nz-icon [nzType]="tabs[2].iconType" nzTheme='twotone'
+            [nzSpin]="tabs[2].iconSpin" [nzTwotoneColor]="tabs[2].color"
+            style="margin: 0 0 0 0;"></span>
+          {{ tabs[2].name }}
+        </ng-template>
+        <app-ended-table [data]="endedData"></app-ended-table>
+      </nz-tab>
+    </nz-tabset> </mat-tab>
+</mat-tab-group>

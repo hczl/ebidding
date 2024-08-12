@@ -1,0 +1,42 @@
+<div nz-row style="margin-bottom: 20px;">
+    <div nz-col nzSpan="8">
+        <input nz-input placeholder="Basic usage" [(ngModel)]="value" (input)="input($event)" />
+    </div>
+    <div nz-col nzSpan="8" style="margin-left: 20px;">
+        <nz-date-picker [(ngModel)]="date" (ngModelChange)="onChange($event)" style="width: 100%"></nz-date-picker>
+    </div>
+    <div nz-col nzSpan="8">
+    </div>
+</div>
+
+<div nz-row>
+    <div nz-col nzSpan="20">
+        <nz-card nzHoverable style="width: 100%" [nzBordered]="false" [nzTitle]="'Person List'">
+            <nz-table #basicTable [nzData]="listOfData">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Address</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of basicTable.data">
+                        <td>{{ data.name }}</td>
+                        <td>{{ data.age }}</td>
+                        <td>{{ data.address }}</td>
+                        <td>
+                            <a>Action 一 {{ data.name }}</a>
+                            <nz-divider nzType="vertical"></nz-divider>
+                            <a>Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </nz-card>
+    </div>
+</div>
+
+<!-- //引入websocket -->
+<app-websocket></app-websocket>

@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    url: ${ACCOUNT_DATASOURCE_URL}
+    username: ${ACCOUNT_DATASOURCE_USERNAME}
+    password: ${ACCOUNT_DATASOURCE_PASSWORD}
+
+  jpa:
+    show-sql: true
+
+ebidding:
+  account-endpoint: ${ACCOUNT_SERVICE_ENDPOINT}
+  bid-endpoint: ${BID_SERVICE_ENDPOINT}
+  bwic-endpoint: ${BWIC_SERVICE_ENDPOINT}

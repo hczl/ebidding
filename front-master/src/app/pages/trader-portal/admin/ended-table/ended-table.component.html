@@ -1,0 +1,31 @@
+
+
+  <button nz-button nzType="primary" (click)="downloadFile()" nzShape="round"><span nz-icon nzType="download">Download</span></button>
+  <nz-table #endedTable [nzData]="data" >
+    <thead>
+      <tr>
+        <th
+          *ngFor="let column of listOfColumns"
+          [nzSortFn]="column.sortFn"
+        >
+          {{ column.name }}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let bwic of endedTable.data">
+        <td>{{ bwic.bwicId }}</td>
+        <td>{{ bwic.bondId }}</td>
+        <td>{{ bwic.cusip }}</td>
+        <td>{{ bwic.issuer }}</td>
+        <td>{{ bwic.size }}</td>
+        <td>{{ bwic.startPrice | number:'1.1-1'}}</td>
+        <td>{{ bwic.maxPrice | number:'1.1-1'}}</td>
+        <td>{{ bwic.startTime }}</td>
+        <td>{{ bwic.dueTime }}</td>
+        <td>{{ bwic.lastBidTime}}</td>
+        <td>{{ bwic.bidCounts }}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+

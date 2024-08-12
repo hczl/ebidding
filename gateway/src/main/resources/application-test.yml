@@ -1,0 +1,26 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: account_service
+          uri: ${ACCOUNT_SERVICE_ENDPOINT}
+          predicates:
+            - Path=/api/v1/account-service/**
+          filters:
+            JwtFilter
+        - id: bid_service
+          uri: ${BID_SERVICE_ENDPOINT}
+          predicates:
+            - Path=/api/v1/bid-service/**,/msg/**
+          filters:
+            JwtFilter
+        - id : bwic_service
+          uri: ${BWIC_SERVICE_ENDPOINT}
+          predicates:
+            - Path=/api/v1/bwic-service/**
+          filters:
+            JwtFilter
+        - id : ui_service
+          uri: ${UI_SERVICE_ENDPOINT}
+          predicates:
+            - Path=/**

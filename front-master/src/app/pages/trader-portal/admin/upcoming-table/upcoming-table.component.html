@@ -1,0 +1,49 @@
+<nz-table #upcomingTable nzBordered [nzData]="data" nzTableLayout="fixed">
+    <thead>
+      <tr>
+        <th>BWIC ID</th>
+        <th>Bond ID</th>
+        <th>Cusip</th>
+        <th>Issuer</th>
+        <th>Size</th>
+        <th>Start Price</th>
+        <th>Start Time</th>
+        <th>Due Time</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of upcomingTable.data">
+        <ng-container *ngIf="!editCache[data.bwicId].edit; else editTemplate">
+          <td>{{ data.bwicId }}</td>
+          <td>{{ data.bondId }}</td>
+          <td>{{ data.cusip }}</td>
+          <td>{{ data.issuer }}</td>
+          <td>{{ data.size }}</td>
+          <td>{{ data.startPrice | number:'1.1-1'}}</td>
+          <td>{{ data.startTime }}</td>
+          <td>{{ data.dueTime }}</td>
+          <td><a (click)="startEdit(data.bwicId)">Edit</a>
+            <nz-divider nzType="vertical"></nz-divider>
+          <a (click)="deleteRow(data.bwicId)">Delete</a>
+          </td>
+        </ng-container>
+        <ng-template #editTemplate>
+          <td><input type="text" nz-input [(ngModel)]="editCache[data.bwicId].data.bwicId" /></td>
+          <td><input type="text" nz-input [(ngModel)]="editCache[data.bwicId].data.bondId" /></td>
+          <td><input type="text" nz-input [(ngModel)]="editCache[data.bwicId].data.cusip" /></td>
+          <td><input type="text" nz-input [(ngModel)]="editCache[data.bwicId].data.issuer" /></td>
+          <td><input type="text" nz-input [(ngModel)]="editCache[data.bwicId].data.size" /></td>
+          <td><input type="text" nz-input [(ngModel)]="editCache[data.bwicId].data.startPrice" /></td>
+          <td><input type="text" nz-input [(ngModel)]="editCache[data.bwicId].data.startTime" /></td>
+          <td><input type="text" nz-input [(ngModel)]="editCache[data.bwicId].data.dueTime" /></td>
+          <td>
+            <a (click)="saveEdit(data.bwicId)" class="save">Save</a>
+            <nz-divider nzType="vertical"></nz-divider>
+            <a nz-popconfirm nzPopconfirmTitle="Sure to cancel?" (nzOnConfirm)="cancelEdit(data.bwicId)">Cancel</a>
+          </td>
+        </ng-template>
+      </tr>
+    </tbody>
+  </nz-table>
+  

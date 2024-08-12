@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: account-svc-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: account-svc
+      env: test
+  template:
+    metadata:
+      labels:
+        app: account-svc
+        env: test
+    spec:
+      containers:
+        - name: account-svc
+          image: ebidding/account-svc
+          imagePullPolicy: Never
+          ports:
+            - name: http-port
+              containerPort: 80
+          resources:
+            requests:
+              memory: 200Mi
+              cpu: 100m
+            limits:
+              memory: 600Mi
+              cpu: 500m
+          envFrom:
+            - configMapRef:
+                name: common-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: account-service
+spec:
+  selector:
+    app: account-svc
+    env: test
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80

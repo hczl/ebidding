@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    active: uat
+  application:
+    name: bwic-service
+
+server:
+  port: 8003
+
+ebidding:
+  account-endpoint: localhost:8001
+  bid-endpoint: localhost:8002
+  bwic-endpoint: localhost:8003

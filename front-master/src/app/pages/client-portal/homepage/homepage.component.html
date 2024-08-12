@@ -1,0 +1,38 @@
+<mat-tab-group (selectedIndexChange)="onTabChange($event)">
+  <mat-tab label="Chat with GPT"> <mat-card class="example-card">
+      <!-- <mat-card-header>
+        <mat-card-subtitle>Chat with GPT</mat-card-subtitle>
+      </mat-card-header> -->
+      <h2>Chat with GPT</h2>
+      <mat-card-content class="content-border">
+        <p>{{ gptResponse }}</p>
+      </mat-card-content>
+      <mat-card-footer>
+        <mat-form-field appearance="outline"
+          class="example-full-width chat-form">
+          <mat-label>Client Chat</mat-label>
+          <input matInput #message maxlength="256"
+            placeholder="I need help with..."
+            (keydown.enter)="sendMessage(message.value); $event.preventDefault()">
+          <mat-icon matSuffix [fontIcon]="submitIconType"
+            (click)="sendMessage(message.value)" [ngClass]="{'active': hover}"
+            (mouseover)="hover = true" (mouseout)="hover = false"></mat-icon>
+          <mat-hint align="start"><strong>Feel free to ask!</strong> </mat-hint>
+          <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+        </mat-form-field>
+        <mat-progress-bar [mode]="progressBarMode"></mat-progress-bar>
+      </mat-card-footer>
+    </mat-card></mat-tab>
+  <mat-tab label="echarts">
+    <div class="wrap">
+      <nz-carousel class="carousel" nzAutoPlay>
+        <div nz-carousel-content>
+          <div id="bar" class="echarts"></div>
+        </div>
+        <div nz-carousel-content>
+          <div id="lineChart" class="echarts"></div>
+        </div>
+      </nz-carousel>
+    </div>
+  </mat-tab>
+</mat-tab-group>

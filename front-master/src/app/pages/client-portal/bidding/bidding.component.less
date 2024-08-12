@@ -1,0 +1,136 @@
+.save {
+  margin-right: 8px;
+}
+
+.search-box {
+  padding: 8px;
+}
+
+.search-box input {
+  width: 188px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.search-box button {
+  width: 90px;
+}
+
+.search-button {
+  margin-right: 8px;
+}
+
+::ng-deep {
+
+  //表格翻页围栏
+  .ant-table-pagination.ant-pagination {
+    margin: 0 0;
+  }
+
+  //button
+  .ant-btn {
+    line-height: 1.5715;
+    position: relative;
+    display: inline-block;
+    font-weight: 400;
+    white-space: nowrap;
+    text-align: center;
+    background-image: none;
+    border: 1px solid transparent;
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    -webkit-user-select: none;
+    user-select: none;
+    touch-action: manipulation;
+    height: 32px;
+    padding: 4px 15px;
+    font-size: 14px;
+    border-radius: 6px;
+    color: rgb(245, 245, 245);
+    border-color: #d9d9d9;
+    background: #012d74;
+  }
+
+  //表格内容
+  .ant-table table {
+    width: 100%;
+    text-align: left;
+    border-radius: 2px 2px 0 0;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+
+  //表头
+  thead {
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+    background: #012d74;
+  }
+
+  //页码
+  .ant-pagination-item-active a {
+    color: white;
+    background-color: #012d74;
+  }
+
+  //表头
+  .ant-table-thead>tr>th {
+    position: relative;
+    color: rgba(0, 0, 0, 0.85);
+    font-weight: 500;
+    text-align: left;
+    background: #fafafa;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background 0.3s ease;
+  }
+
+  //弹出框表头
+  .ant-modal-header {
+    padding: 16px 24px;
+    color: rgba(0, 0, 0, 0.85);
+    border-bottom: 1px solid #f0f0f0;
+    border-radius: 2px 2px 0 0;
+  }
+
+  //弹出对话框
+  .ant-modal {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 14px;
+    font-variant: tabular-nums;
+    line-height: 1.5715;
+    list-style: none;
+    font-feature-settings: 'tnum';
+    pointer-events: none;
+    position: relative;
+    top: 100px;
+    width: auto;
+    max-width: calc(100vw - 32px);
+    margin: 0 auto;
+    padding-bottom: 24px;
+  }
+
+  .data-container>div {
+    display: flex;
+    align-items: center;
+    line-height: 2.5;
+    /* 设置合适的行高值 */
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+  }
+}
+
+.data-msg div {
+  font-size: 20px;
+  /* 设置字体大小，可以根据需要修改数值 */
+}
+
+.ant-table-thead {
+  .ant-table-cell {
+    color: #fff;
+  }
+}

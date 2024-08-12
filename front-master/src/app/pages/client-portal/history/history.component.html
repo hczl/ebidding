@@ -1,0 +1,136 @@
+<nz-table #nzTable [nzData]="listOfBwicData" nzTableLayout="fixed">
+  <thead>
+    <tr>
+      <th>BWIC ID
+        <nz-filter-trigger [(nzVisible)]="bwicIdVisible" [nzActive]="bwicIdSearchValue.length > 0"
+          [nzDropdownMenu]="bwicIdMenu">
+          <span nz-icon nzType="search"></span>
+        </nz-filter-trigger>
+        <nz-dropdown-menu #bwicIdMenu="nzDropdownMenu">
+          <div class="ant-table-filter-dropdown">
+            <div class="search-box">
+              <input type="text" nz-input placeholder="Search name" [(ngModel)]="bwicIdSearchValue" />
+              <button nz-button nzSize="small" nzType="primary" (click)="bwicIdSearch()"
+                class="search-button">Search</button>
+              <button nz-button nzSize="small" (click)="bwicIdReset()">Reset</button>
+            </div>
+          </div>
+        </nz-dropdown-menu>
+      </th>
+      <th>Issuer
+        <nz-filter-trigger [(nzVisible)]="issuerVisible" [nzActive]="issuerSearchValue.length > 0"
+          [nzDropdownMenu]="issuerIdMenu">
+          <span nz-icon nzType="search"></span>
+        </nz-filter-trigger>
+        <nz-dropdown-menu #issuerIdMenu="nzDropdownMenu">
+          <div class="ant-table-filter-dropdown">
+            <div class="search-box">
+              <input type="text" nz-input placeholder="Search name" [(ngModel)]="issuerSearchValue" />
+              <button nz-button nzSize="small" nzType="primary" (click)="issuerSearch()"
+                class="search-button">Search</button>
+              <button nz-button nzSize="small" (click)="issuerReset()">Reset</button>
+            </div>
+          </div>
+        </nz-dropdown-menu>
+      </th>
+      <th>Cusip
+
+        <nz-filter-trigger [(nzVisible)]="cusipVisible" [nzActive]="cusipSearchValue.length > 0"
+          [nzDropdownMenu]="cusipMenu">
+          <span nz-icon nzType="search"></span>
+        </nz-filter-trigger>
+        <nz-dropdown-menu #cusipMenu="nzDropdownMenu">
+          <div class="ant-table-filter-dropdown">
+            <div class="search-box">
+              <input type="text" nz-input placeholder="Search name" [(ngModel)]="cusipSearchValue" />
+              <button nz-button nzSize="small" nzType="primary" (click)="cusipSearch()"
+                class="search-button">Search</button>
+              <button nz-button nzSize="small" (click)="cusipReset()">Reset</button>
+            </div>
+          </div>
+        </nz-dropdown-menu>
+      </th>
+      <th>Start Time</th>
+      <th>Due Time</th>
+      <th>Start Price</th>
+      <th>Size</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of nzTable.data">
+      <td>{{ data.bwicId }}</td>
+      <td>{{ data.issuer }}</td>
+      <td>{{ data.cusip }}</td>
+      <td>{{ data.startTime }}</td>
+      <td>{{ data.dueTime }}</td>
+      <td>{{ data.startPrice | number:'1.1-1'}}</td>
+      <td>{{ data.size }}</td>
+      <td>
+        <button nz-button [nzType]="'default'" (click)="open(data.bwicId)">Details</button>
+        <button nz-button [nzType]="'default'" (click)="result(data.bwicId)"><span>Result</span></button>
+    </tr>
+  </tbody>
+</nz-table>
+
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Result" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  <ng-container *nzModalContent>
+    <div>
+      <span>{{resultText}}</span>
+    </div>
+  </ng-container>
+</nz-modal>
+
+<nz-drawer [nzBodyStyle]="{ overflow: 'auto' }" [nzMaskClosable]="false" [nzWidth]="720" [nzVisible]="drawervisible"
+           nzTitle="Bidding history" (nzOnClose)="close()">
+  <ng-container *nzDrawerContent>
+
+    <nz-table #basicTable [nzData]="dataSet">
+      <thead>
+      <tr>
+        <th>BwicId</th>
+        <th>Price</th>
+        <th>Ranking</th>
+        <th>Time</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td>{{data.bwicId}}</td>
+        <td>{{data.price | number:'1.1-1'}}</td>
+        <td>{{data.ranking}}</td>
+        <td>
+          {{ data.time }}
+        </td>
+      </tr>
+      </tbody>
+    </nz-table>
+  </ng-container>
+</nz-drawer>
+
+<nz-drawer [nzBodyStyle]="{ overflow: 'auto' }" [nzMaskClosable]="false" [nzWidth]="720" [nzVisible]="drawervisible"
+  nzTitle="Bidding history" (nzOnClose)="close()">
+  <ng-container *nzDrawerContent>
+
+    <nz-table #basicTable [nzData]="dataSet">
+      <thead>
+        <tr>
+          <th>BwicId</th>
+          <th>Price</th>
+          <th>Ranking</th>
+          <th>Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of basicTable.data">
+          <td>{{data.bwicId}}</td>
+          <td>{{data.price | number:'1.1-1'}}</td>
+          <td>{{data.ranking}}</td>
+          <td>
+            {{ data.time | date:'yyyy-MM-dd HH:mm:ss' }}
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </ng-container>
+</nz-drawer>

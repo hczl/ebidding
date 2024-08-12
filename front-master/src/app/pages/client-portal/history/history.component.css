@@ -1,0 +1,97 @@
+.save {
+  margin-right: 8px;
+}
+.search-box {
+  padding: 8px;
+}
+.search-box input {
+  width: 188px;
+  margin-bottom: 8px;
+  display: block;
+}
+.search-box button {
+  width: 90px;
+}
+.search-button {
+  margin-right: 8px;
+}
+::ng-deep .ant-table table {
+  width: 100%;
+  text-align: left;
+  border-radius: 1px 1px 0 0;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+::ng-deep .ant-pagination {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 14px;
+  font-variant: tabular-nums;
+  line-height: 1.5715;
+  list-style: none;
+  font-feature-settings: 'tnum';
+  background-color: beige;
+}
+::ng-deep .ant-btn-primary {
+  color: #fff;
+  border-color: #012d74;
+  background: #012d74;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+}
+::ng-deep .ant-table-pagination.ant-pagination {
+  margin: 0 0;
+}
+::ng-deep .ant-btn {
+  line-height: 1.5715;
+  position: relative;
+  display: inline-block;
+  font-weight: 400;
+  white-space: nowrap;
+  text-align: center;
+  background-image: none;
+  border: 1px solid transparent;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
+  height: 32px;
+  padding: 4px 6px;
+  font-size: 14px;
+  border-radius: 6px;
+  color: #f5f5f5;
+  border-color: #d9d9d9;
+  background: #012d74;
+}
+::ng-deep .ant-table table {
+  width: 100%;
+  text-align: left;
+  border-radius: 2px 2px 0 0;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+::ng-deep thead {
+  display: table-header-group;
+  vertical-align: middle;
+  border-color: inherit;
+  background: #012d74;
+}
+::ng-deep .ant-table-thead > tr > th {
+  position: relative;
+  font-weight: 500;
+  text-align: left;
+  background: #fafafa;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background 0.3s ease;
+}
+::ng-deep .ant-pagination-item-active a {
+  color: white;
+  background-color: #012d74;
+}
+.ant-table-thead .ant-table-cell {
+  color: #fff;
+}

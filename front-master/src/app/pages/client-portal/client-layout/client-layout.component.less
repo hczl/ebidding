@@ -1,0 +1,201 @@
+.content {
+  height: calc(100vh - 64px);
+  border-radius: 10px;
+  // margin: 16px;
+  // margin-left: 32px;
+  padding: 16px;
+  overflow-y: scroll;
+}
+
+.menu-button {
+  width: 100%;
+  text-align: left;
+  display: flex;
+  justify-content: center;
+  font-size: 1rem;
+  transition: background-color 0.3s, color 0.3s;
+  padding: 30px 0;
+  margin-bottom: 30px;
+
+  .mat-icon {
+    width: 40px;
+    flex-shrink: 0;
+    text-align: center;
+  }
+
+  mat-icon * {
+    text-align: left;
+    margin-right: 8px;
+    display: inline-block;
+    flex-shrink: 0;
+    width: 40px;
+    transition: color 0.3s;
+    /* 为图标添加颜色过渡动画 */
+  }
+}
+
+
+
+.avatar {
+  margin-top: 16px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.name {
+  margin-top: 8px;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 40px;
+  text-align: center;
+}
+
+.designation {
+  margin-top: 2px;
+  font-size: 0.7rem;
+  color: lightgrey;
+}
+
+
+/* 定义滚动条的轨道（背景） */
+.content::-webkit-scrollbar {
+  width: 8px;
+  background-color: #F5F5F5;
+}
+
+/* 定义滚动条的轨道（背景）上的阴影或边界 */
+.content::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+
+//---------------------------------------------client layout---------------------------------------------
+::ng-deep {
+
+  //总背景栏
+  .mat-drawer-container-client {
+    position: relative;
+    z-index: 1;
+    box-sizing: border-box;
+    -webkit-overflow-scrolling: touch;
+    display: block;
+    overflow: hidden;
+    background-color: #eceae4;
+  }
+
+  //chat对话框头
+  .mat-mdc-card-header {
+    display: flex;
+    padding: 16px 16px 0;
+    background-color: #012d74;
+    color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+
+  /* 定义滚动条的滑块 */
+  .content::-webkit-scrollbar-thumb {
+    background-color: #012d74;
+    border-radius: 10px;
+  }
+
+  //对话框表底
+  .example-card[_ngcontent-ng-c2779749524] {
+    max-width: 70%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    border-radius: 20px;
+  }
+
+  .mat-mdc-text-field-wrapper {
+    height: auto;
+    flex: auto;
+    text-shadow: #012d74;
+  }
+}
+
+//chat回复
+.content-border[_ngcontent-ng-c3398589236] {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin: 10px;
+  background-color: cornsilk;
+}
+
+.mat-toolbar-client {
+  background: #012d74;
+  color: white;
+}
+
+.mat-sidenav-client {
+  height: calc(100vh);
+  width: 200px;
+  border-right: none;
+  background: #fff;
+  color: white;
+  padding: 16px;
+  text-align: center;
+}
+
+/* 当按钮的路由被激活时，改变它和它内部的元素的颜色 */
+.menu-button-client.active,
+.menu-button-client.active mat-icon,
+.menu-button-client.active span {
+  background-color: #012d74 !important;
+  /* 使用你想要的背景颜色 */
+  color: white !important;
+}
+
+/* 当鼠标悬停在按钮上时，改变背景颜色 */
+.menu-button-client:hover {
+  background-color: #e7e0e0 !important;
+}
+
+.LogoutButton {
+  margin-left: auto;
+}
+
+
+.bold-toggle {
+  font-weight: bold;
+}
+
+
+.mat-drawer {
+  position: fixed;
+
+  .changelock {
+    margin-top: 200px;
+    position: absolute;
+    left: 30px;
+    bottom: 30px;
+  }
+
+}
+
+.LogoutButton {
+  position: absolute;
+  bottom: 90px;
+  left: 30px;
+}
+
+.leftNav {
+  .mat-mdc-button-persistent-ripple {
+    text-align: left !important;
+  }
+}
+
+// .mat-drawer-inner-container {
+//   background-color: #000;
+
+//   .menu-button {
+//     background-color: #000;
+//   }
+// }
+
+/* =============== */
+.mat-toolbar-single-row {
+  flex-direction: row-reverse;
+}

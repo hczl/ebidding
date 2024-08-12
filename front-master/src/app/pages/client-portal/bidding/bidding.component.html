@@ -1,0 +1,144 @@
+<!-- <div nz-row>
+  <div nz-col nzSpan="8" nzOffset="8">
+    <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+      <input type="text" [(ngModel)]="searchValue" nz-input placeholder="input BWIC ID/Cussip/Issuer" />
+    </nz-input-group>
+    <ng-template #suffixIconButton>
+      <button nz-button nzType="primary" nzSearch (click)="searchChange()"><span nz-icon
+          nzType="search"></span></button>
+    </ng-template>
+  </div>
+</div> -->
+<div class="logoline">
+  <img src="" alt="">
+</div>
+<nz-table #BiddingRowTable nzBordered [nzData]="listOfData"
+  nzTableLayout="fixed">
+  <thead>
+    <tr>
+      <th>BWIC ID <nz-filter-trigger [(nzVisible)]="bwicIdVisible"
+          [nzActive]="bwicIdSearchValue.length > 0"
+          [nzDropdownMenu]="bwicIdMenu">
+          <span nz-icon nzType="search"></span>
+        </nz-filter-trigger>
+        <nz-dropdown-menu #bwicIdMenu="nzDropdownMenu">
+          <div class="ant-table-filter-dropdown">
+            <div class="search-box">
+              <input type="text" nz-input placeholder="Search name"
+                [(ngModel)]="bwicIdSearchValue" />
+              <button nz-button nzSize="small" nzType="primary"
+                (click)="bwicIdSearch()" class="search-button">Search</button>
+              <button nz-button nzSize="small"
+                (click)="bwicIdReset()">Reset</button>
+            </div>
+          </div>
+        </nz-dropdown-menu>
+      </th>
+      <th>Issuer <nz-filter-trigger [(nzVisible)]="issuerVisible"
+          [nzActive]="issuerSearchValue.length > 0"
+          [nzDropdownMenu]="issuerIdMenu">
+          <span nz-icon nzType="search"></span>
+        </nz-filter-trigger>
+        <nz-dropdown-menu #issuerIdMenu="nzDropdownMenu">
+          <div class="ant-table-filter-dropdown">
+            <div class="search-box">
+              <input type="text" nz-input placeholder="Search name"
+                [(ngModel)]="issuerSearchValue" />
+              <button nz-button nzSize="small" nzType="primary"
+                (click)="issuerSearch()" class="search-button">Search</button>
+              <button nz-button nzSize="small"
+                (click)="issuerReset()">Reset</button>
+            </div>
+          </div>
+        </nz-dropdown-menu>
+      </th>
+      <th>Cusip <nz-filter-trigger [(nzVisible)]="cusipVisible"
+          [nzActive]="cusipSearchValue.length > 0" [nzDropdownMenu]="cusipMenu">
+          <span nz-icon nzType="search"></span>
+        </nz-filter-trigger>
+        <nz-dropdown-menu #cusipMenu="nzDropdownMenu">
+          <div class="ant-table-filter-dropdown">
+            <div class="search-box">
+              <input type="text" nz-input placeholder="Search name"
+                [(ngModel)]="cusipSearchValue" />
+              <button nz-button nzSize="small" nzType="primary"
+                (click)="cusipSearch()" class="search-button">Search</button>
+              <button nz-button nzSize="small"
+                (click)="cusipReset()">Reset</button>
+            </div>
+          </div>
+        </nz-dropdown-menu>
+      </th>
+      <th>StartTime</th>
+      <th>DueTime</th>
+      <th>StartPrice</th>
+      <th>Size</th>
+      <th>Rating</th>
+      <th>Coupon</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of BiddingRowTable.data">
+      <ng-container>
+        <td>{{ data.bwicId }}</td>
+        <td>{{ data.issuer }}</td>
+        <td>{{ data.cusip }}</td>
+        <td>{{ data.startTime }}</td>
+        <td>{{ data.dueTime }}</td>
+        <td>{{ data.startPrice | number:'1.1-1'}}</td>
+        <td>{{ data.size }}</td>
+        <td>{{ data.rating?data.rating:'' }}</td>
+        <td>{{ data.coupon?data.coupon:'' }}</td>
+        <td>
+          <button nz-button nzType="default" [disabled]="!data.active"
+            (click)="startBidding(data)">Bidding</button>
+        </td>
+      </ng-container>
+    </tr>
+  </tbody>
+</nz-table>
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Bidding"
+  (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" nzOkType="default"
+  [nzMaskClosable]="false">
+  <ng-container *nzModalContent>
+    <!-- <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="handleOk()">
+      <nz-form-item>
+        <nz-form-control>
+          <input type="text" nz-input formControlName="bwicId" />
+        </nz-form-control>
+      </nz-form-item>
+    </form> -->
+    <div>
+      <div>
+        <div Title="BWIC-Info" class="data-container">
+          <div>
+            <span>Issuer : </span>
+            <span>{{biddingData.issuer}}</span>
+          </div>
+          <div>
+            <span>Cusip : </span>
+            <span>{{biddingData.cusip}}</span>
+          </div>
+          <div>
+            <span>Size : </span>
+            <span>{{biddingData.size}}</span>
+          </div>
+        </div>
+        <div></div>
+        <div class="data-msg">
+          <div>
+            {{msg}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
+      <input type="text" nz-input placeholder="BIDDING" [(ngModel)]="price" />
+    </nz-input-group>
+    <ng-template #suffixButton>
+      <button nz-button nzType="default" nzSize="large" class=""
+        (click)="submit()">Submit</button>
+    </ng-template>
+  </ng-container>
+</nz-modal>

@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    url: ${BWIC_DATASOURCE_URL}
+    username: ${BWIC_DATASOURCE_USERNAME}
+    password: ${BWIC_DATASOURCE_PASSWORD}
+
+  jpa:
+    show-sql: true
+
+ebidding:
+  account-endpoint: ${ACCOUNT_SERVICE_ENDPOINT}
+  bid-endpoint: ${BID_SERVICE_ENDPOINT}
+  bwic-endpoint: ${BWIC_SERVICE_ENDPOINT}

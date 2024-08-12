@@ -1,0 +1,59 @@
+<nz-table #nestedTable [nzData]="listOfParentData" [nzLoading]="isLoading">
+  <thead>
+    <tr>
+      <th></th>
+      <th>BWIC ID</th>
+      <th>Bond ID</th>
+      <th>Cusip</th>
+      <th>Issuer</th>
+      <th>Size</th>
+      <th>Start Price</th>
+      <th>Max Price</th>
+      <th>Start Time</th>
+      <th>Due Time</th>
+      <th>Last Bid Time</th>
+      <th>Bid Counts</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-template ngFor let-data [ngForOf]="nestedTable.data">
+      <tr class="row-hover" (click)="onRowClick(data)" [ngClass]="{'selected-row': selectedRow === data}">
+        <td [(nzExpand)]="data.expand"  (click)="$event.stopPropagation()"></td>
+        <td>{{ data.bwicId }}</td>
+        <td>{{ data.bondId }}</td>
+        <td>{{ data.cusip }}</td>
+        <td>{{ data.issuer }}</td>
+        <td>{{ data.size }}</td>
+        <td>{{ data.startPrice | number:'1.1-1' }}</td>
+        <td>{{ data.maxPrice | number:'1.1-1' }}</td>
+        <td>{{ data.startTime }}</td>
+        <td>{{ data.dueTime }}</td>
+        <td>{{ data.lastBidTime }}</td>
+        <td>{{ data.bidCounts }}</td>
+      </tr>
+      
+      <tr [nzExpand]="data.expand">
+        <nz-table #innerTable [nzData]="data.children" nzSize="middle" [nzShowPagination]="false">
+          <thead>
+            <tr>
+              <th>Ranking</th>
+              <th>Account ID</th>
+              <th>Account Name</th>
+              <th>Price</th>
+              <th>Transaction Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of innerTable.data">
+              <td>{{ data.ranking }}</td>
+              <td>{{ data.accountId }}</td>
+              <td>{{ data.accountName }}</td>
+              <td>{{ data.price | number:'1.1-1'  }}</td>  
+              <td>{{ data.time }}</td>
+            </tr>
+          </tbody>
+        </nz-table>
+      </tr>
+    </ng-template>
+  </tbody>
+</nz-table>

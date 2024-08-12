@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: common-config
+data:
+  #spring configuration
+  SPRING_PROFILES_ACTIVE: test
+  SERVER_PORT: "80"
+
+  #service endpoint
+  ACCOUNT_SERVICE_ENDPOINT: http://account-service
+  BID_SERVICE_ENDPOINT: http://bid-service
+  BWIC_SERVICE_ENDPOINT: http://bwic-service
+  UI_SERVICE_ENDPOINT: http://ui-service
+
+  #secrets
+  HASH_KEY: "123456"
+  SIGNING_SECRET: "123456"
+
+  # database configuration
+  ACCOUNT_DATASOURCE_URL: jdbc:mysql://rm-2vc088510r843d0sfeo.mysql.cn-chengdu.rds.aliyuncs.com:3306/ebidding_account?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+  ACCOUNT_DATASOURCE_USERNAME: cqteam
+  ACCOUNT_DATASOURCE_PASSWORD: cq-team00
+  BID_DATASOURCE_URL: jdbc:mysql://rm-2vc088510r843d0sfeo.mysql.cn-chengdu.rds.aliyuncs.com:3306/ebidding_bid?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+  BID_DATASOURCE_USERNAME: cqteam
+  BID_DATASOURCE_PASSWORD: cq-team00
+  BWIC_DATASOURCE_URL: jdbc:mysql://rm-2vc088510r843d0sfeo.mysql.cn-chengdu.rds.aliyuncs.com:3306/ebidding_bwic?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+  BWIC_DATASOURCE_USERNAME: cqteam
+  BWIC_DATASOURCE_PASSWORD: cq-team00

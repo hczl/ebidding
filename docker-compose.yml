@@ -1,0 +1,144 @@
+version: '3.8'
+
+services:
+  account-service:
+    build: ./account-svc
+    image: ebidding/account-svc
+    environment:
+      - SPRING_PROFILES_ACTIVE
+      - SERVER_PORT
+      - SIGNING_SECRET
+      - HASH_KEY
+      - ACCOUNT_SERVICE_ENDPOINT
+      - BID_SERVICE_ENDPOINT
+      - BWIC_SERVICE_ENDPOINT
+      - ACCOUNT_DATASOURCE_URL
+      - ACCOUNT_DATASOURCE_USERNAME
+      - ACCOUNT_DATASOURCE_PASSWORD
+    deploy:
+      resources:
+        limits:
+          cpus: ${CPU_LIMIT}
+          memory: ${MEMORY_LIMIT}
+        reservations:
+          memory: ${MEMORY_REQUEST}
+    networks:
+      - internal_access
+      - external_access # db access
+
+  # pricer-service:
+  #   build: ./pricer-svc
+  #   image: ebidding/pricer-svc
+  #   environment:
+  #     - SPRING_PROFILES_ACTIVE
+  #     - SERVER_PORT
+  #     - SIGNING_SECRET
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         cpus: ${CPU_LIMIT}
+  #         memory: ${MEMORY_LIMIT}
+  #       reservations:
+  #         memory: ${MEMORY_REQUEST}
+  #   networks:
+  #     - internal_access
+
+  bid-service:
+    build: ./bid-svc
+    image: ebidding/bid-svc
+    environment:
+      - SPRING_PROFILES_ACTIVE
+      - SERVER_PORT
+      - SIGNING_SECRET
+      - BID_DATASOURCE_URL
+      - BID_DATASOURCE_USERNAME
+      - BID_DATASOURCE_PASSWORD
+      - ACCOUNT_SERVICE_ENDPOINT
+      - BID_SERVICE_ENDPOINT
+      - BWIC_SERVICE_ENDPOINT
+    deploy:
+      resources:
+        limits:
+          cpus: ${CPU_LIMIT}
+          memory: ${MEMORY_LIMIT}
+        reservations:
+          memory: ${MEMORY_REQUEST}
+    networks:
+      - internal_access
+      - external_access # db access
+
+  bwic-service:
+    build: ./bwic-svc
+    image: ebidding/bwic-svc
+    environment:
+      - SPRING_PROFILES_ACTIVE
+      - SERVER_PORT
+      - SIGNING_SECRET
+      - ACCOUNT_SERVICE_ENDPOINT
+      - BID_SERVICE_ENDPOINT
+      - BWIC_SERVICE_ENDPOINT
+      - PRICER_SERVICE_ENDPOINT
+      - BWIC_DATASOURCE_URL
+      - BWIC_DATASOURCE_USERNAME
+      - BWIC_DATASOURCE_PASSWORD
+#      - JAVA_OPTS=-Xmx600M -XX:+PrintGCDetails
+    deploy:
+      resources:
+        limits:
+          cpus: ${CPU_LIMIT}
+          memory: ${MEMORY_LIMIT}
+        reservations:
+          memory: ${MEMORY_REQUEST}
+    depends_on:
+      - bid-service
+      # - pricer-service
+    networks:
+      - internal_access
+      - external_access # db access
+
+  gateway-service:
+    build: ./gateway
+    image: ebidding/gateway-svc
+    ports:
+      - 80:80
+    environment:
+      - SPRING_PROFILES_ACTIVE
+      - SERVER_PORT
+      - SIGNING_SECRET
+      - ACCOUNT_SERVICE_ENDPOINT
+      - BID_SERVICE_ENDPOINT
+      - BWIC_SERVICE_ENDPOINT
+      - UI_SERVICE_ENDPOINT
+    deploy:
+      resources:
+        limits:
+          cpus: ${CPU_LIMIT}
+          memory: ${MEMORY_LIMIT}
+        reservations:
+          memory: ${MEMORY_REQUEST}
+    depends_on:
+      - account-service
+      # - pricer-service
+      - bid-service
+      - bwic-service
+      - ui-service
+    networks:
+      - internal_access
+      - external_access
+
+  ui-service:
+    build: ./front-master
+    image: ebidding/ui
+    deploy:
+      resources:
+        limits:
+          cpus: ${CPU_LIMIT}
+          memory: ${MEMORY_LIMIT}
+    networks:
+      - internal_access
+
+networks:
+  internal_access:
+    internal: true
+  external_access:
+

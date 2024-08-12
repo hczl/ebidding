@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bid-svc-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bid-svc
+      env: test
+  template:
+    metadata:
+      labels:
+        app: bid-svc
+        env: test
+    spec:
+      containers:
+        - name: bid-svc
+          image: ebidding/bid-svc
+          imagePullPolicy: Never
+          ports:
+            - name: http-port
+              containerPort: 80
+          resources:
+            requests:
+              memory: 200Mi
+              cpu: 100m
+            limits:
+              memory: 600Mi
+              cpu: 500m
+          envFrom:
+            - configMapRef:
+                name: common-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bid-service
+spec:
+  selector:
+    app: bid-svc
+    env: test
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
